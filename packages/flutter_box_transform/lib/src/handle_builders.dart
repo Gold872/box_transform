@@ -112,6 +112,12 @@ class CornerHandleWidget extends StatelessWidget {
       );
 
       if (rotatable) {
+        if (kDebugMode && debugPaintHandleBounds) {
+          child = ColoredBox(
+              color: Colors.blue.withOpacity(0.5),
+              child: child,
+          );
+        }
         child = GestureDetector(
           behavior: HitTestBehavior.opaque,
           onPanStart: onRotationStart,
@@ -122,10 +128,7 @@ class CornerHandleWidget extends StatelessWidget {
             cursor: getRotationCursorForHandle(handlePosition),
             child: Padding(
               padding: getRotationCornerPadding(handlePosition, gestureGap),
-              child: ColoredBox(
-                color: Colors.blue.withOpacity(0.5),
-                child: child,
-              ),
+              child: child,
             ),
           ),
         );
